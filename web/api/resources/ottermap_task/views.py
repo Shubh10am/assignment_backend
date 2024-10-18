@@ -14,7 +14,7 @@ ns = Namespace("Shop API", description="API to interact with Shop App", path="/s
 class Login(Resource):
     @staticmethod
     def post():
-        """API To Create Access Token in Order To Access All APIs"""
+        """API To Create Access Token in Order To Access APIs"""
         username = "shubh"
         password = "shubh@12"
 
