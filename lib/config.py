@@ -33,14 +33,14 @@ class ProductionConfig(BaseConfig):
     JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', 'test')
     MONGODB_SETTINGS = {
         "db": "ottermap_db",
-        "host": os.getenv('MONGO_HOST', 'mongodb+srv://shubham12342019:shubh123@cluster0.oymgv.mongodb.net/'),
+        "host": os.getenv('MONGO_HOST'),
         "connect": False
     }
 
 
 def init_app():
-    config = DevelopmentConfig    # for development
-    # config = DevelopmentConfig if os.getenv('FLASK_ENV') == 'production' else ProductionConfig
+    # config = DevelopmentConfig    # for development
+    config = DevelopmentConfig if os.getenv('FLASK_ENV') == 'production' else ProductionConfig
 
     app.config.from_object(config)
     mongoengine.connect(**app.config["MONGODB_SETTINGS"])
