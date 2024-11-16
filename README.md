@@ -45,8 +45,8 @@ pip install -r requirements.txt
 Create a `.env` file (if required):
 
 ```bash
-FLASK_ENV=development
-MONGO_URI=mongodb://localhost:27017/yourdatabase
+FLASK_ENV='production'
+MONGO_HOST= your atlas cloud mongo url
 JWT_SECRET_KEY=your_secret_key
 ```
 
