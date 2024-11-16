@@ -1,7 +1,3 @@
-Absolutely! Here's the updated **README** with both the **deployed URL** on Render and the **local URL** (`http://127.0.0.1:5000/`) added for clarity. The **local URL** is useful if you're testing the API on your local machine.
-
----
-
 # README - User and Admin API Documentation
 
 This README provides an overview and documentation for the **User and Admin API** that manages user registration, login, assignment uploads, and task management using a MongoDB database. The API is deployed on **Render** and can be accessed remotely via the endpoint:
