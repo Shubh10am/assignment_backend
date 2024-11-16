@@ -14,9 +14,6 @@ class AssignUser(Document):
     user_type = StringField(choices=["admin", "user"])
     created_at = DateTimeField(default=datetime.utcnow)
 
-    def __str__(self):
-        return self.username
-
     @classmethod
     def generate_id(cls):
         return utils.generate_id(cls.prepend_string)

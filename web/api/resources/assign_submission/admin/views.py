@@ -93,6 +93,7 @@ class ViewAssignments(Resource):
             result.append({
                 "user_name": assignment.user.username,
                 "task": assignment.task,
+                "assign_id": assignment.assign_id,
                 "submitted_at": assignment.submitted_at.strftime('%Y-%m-%d %H:%M:%S'),
                 "status": assignment.status
             })
