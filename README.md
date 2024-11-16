@@ -1,6 +1,18 @@
+Absolutely! Here's the updated **README** with both the **deployed URL** on Render and the **local URL** (`http://127.0.0.1:5000/`) added for clarity. The **local URL** is useful if you're testing the API on your local machine.
+
+---
+
 # README - User and Admin API Documentation
 
-This README provides an overview and documentation for the **User and Admin API** that manages user registration, login, assignment uploads, and task management using a MongoDB database. The API is designed using **Flask**, **Flask-RESTx**, and **Flask-JWT-Extended** for handling authentication and data validation.
+This README provides an overview and documentation for the **User and Admin API** that manages user registration, login, assignment uploads, and task management using a MongoDB database. The API is deployed on **Render** and can be accessed remotely via the endpoint:
+
+### **Deployed Backend URL:**
+[https://assignment-submission-bym9.onrender.com](https://assignment-submission-bym9.onrender.com)
+
+For local development, the API can also be accessed at:
+
+### **Local Backend URL (for testing on your machine):**
+[http://127.0.0.1:5000](http://127.0.0.1:5000)
 
 ---
 
@@ -14,10 +26,56 @@ This README provides an overview and documentation for the **User and Admin API*
 
 ---
 
+## **How to Use the API**
+
+The API is available for access at the following base URL:
+
+- **Base URL for all API endpoints**: `https://assignment-submission-bym9.onrender.com` (for the deployed version)
+
+Or, if you're working locally on your machine, the base URL is:
+
+- **Local URL for all API endpoints**: `http://127.0.0.1:5000` (for local testing)
+
+To access the API, make sure to include a valid **JWT access token** in the request headers. The token can be obtained by logging in as a **user** or **admin** via the `/user/login` or `/admin/login` endpoints.
+
+---
+
+## **Managing Access Tokens**
+
+The **JWT access token** is required for **authenticated requests**. Here is how you can manage and use the access token in the headers:
+
+### **1. Get an Access Token**
+
+- **For Users**: Call the `/user/login` endpoint with your username and password to get an access token.
+- **For Admins**: Call the `/admin/login` endpoint with your username and password to get an access token.
+
+### **2. Include Access Token in the Request Headers**
+
+Once you obtain the access token, include it in the `Authorization` header as a `Bearer` token in your requests to access protected routes.
+
+#### Example:
+```http
+GET /admin/assignments HTTP/1.1
+Host: assignment-submission-bym9.onrender.com
+Authorization: Bearer YOUR_JWT_TOKEN
+```
+
+- Replace `YOUR_JWT_TOKEN` with the actual token returned from the login API.
+- The `Authorization` header is required for all routes that are protected by authentication.
+
+---
+
 ## **User API Endpoints**
 
 ### 1. **User Registration** (`POST /user/register`)
+
 This endpoint registers a new user. The user needs to provide a `username`, `email`, and `password`.
+
+#### Request URL (Deployed):
+`https://assignment-submission-bym9.onrender.com/user/register`
+
+#### Request URL (Local):
+`http://127.0.0.1:5000/user/register`
 
 #### Request Body:
 ```json
@@ -32,24 +90,17 @@ This endpoint registers a new user. The user needs to provide a `username`, `ema
 - **200 OK**: User successfully registered.
 - **400 Bad Request**: If the username or email is missing, or if they already exist in the database.
 
-Example Response:
-```json
-{
-  "status": "success",
-  "code": 200,
-  "message": "User Successfully Registered",
-  "data": {
-    "user_id": "user123",
-    "username": "john_doe",
-    "email": "john@example.com"
-  }
-}
-```
-
 ---
 
 ### 2. **User Login** (`POST /user/login`)
+
 This endpoint allows users to log in by providing their `username` and `password`. A JWT token will be returned upon successful login.
+
+#### Request URL (Deployed):
+`https://assignment-submission-bym9.onrender.com/user/login`
+
+#### Request URL (Local):
+`http://127.0.0.1:5000/user/login`
 
 #### Request Body:
 ```json
@@ -64,24 +115,17 @@ This endpoint allows users to log in by providing their `username` and `password
 - **400 Bad Request**: If username or password is incorrect.
 - **500 Internal Server Error**: If there’s an issue with the server.
 
-Example Response:
-```json
-{
-  "status": "success",
-  "code": 200,
-  "message": "Login Successfully",
-  "data": {
-    "user_id": "user123",
-    "username": "john_doe",
-    "access_token": "your_jwt_token"
-  }
-}
-```
-
 ---
 
 ### 3. **Upload Assignment** (`POST /user/upload`)
+
 This endpoint allows authenticated users to upload assignments. The user must provide the `task` and `admin` to whom the assignment is related.
+
+#### Request URL (Deployed):
+`https://assignment-submission-bym9.onrender.com/user/upload`
+
+#### Request URL (Local):
+`http://127.0.0.1:5000/user/upload`
 
 #### Request Body:
 ```json
@@ -95,46 +139,35 @@ This endpoint allows authenticated users to upload assignments. The user must pr
 - **200 OK**: Assignment uploaded successfully.
 - **400 Bad Request**: If `task` or `admin` fields are missing.
 
-Example Response:
-```json
-{
-  "status": "success",
-  "code": 200,
-  "message": "Assignment uploaded successfully!",
-  "data": {
-    "task": "Complete the report"
-  }
-}
-```
-
 ---
 
 ### 4. **Fetch All Admins** (`GET /user/all-admin`)
+
 This endpoint retrieves a list of all registered admins. Only an authenticated user with valid credentials can access this endpoint.
+
+#### Request URL (Deployed):
+`https://assignment-submission-bym9.onrender.com/user/all-admin`
+
+#### Request URL (Local):
+`http://127.0.0.1:5000/user/all-admin`
 
 #### Response:
 - **200 OK**: Returns a list of all admins.
 - **403 Forbidden**: If the current user is not authorized.
-
-Example Response:
-```json
-{
-  "status": "success",
-  "code": 200,
-  "message": "All Admin List",
-  "data": [
-    {"username": "admin1"},
-    {"username": "admin2"}
-  ]
-}
-```
 
 ---
 
 ## **Admin API Endpoints**
 
 ### 1. **Admin Registration** (`POST /admin/register`)
+
 This endpoint allows an admin to register by providing their `username`, `email`, and `password`.
+
+#### Request URL (Deployed):
+`https://assignment-submission-bym9.onrender.com/admin/register`
+
+#### Request URL (Local):
+`http://127.0.0.1:5000/admin/register`
 
 #### Request Body:
 ```json
@@ -149,24 +182,17 @@ This endpoint allows an admin to register by providing their `username`, `email`
 - **200 OK**: Admin successfully registered.
 - **400 Bad Request**: If the username or email is missing, or if they already exist in the database.
 
-Example Response:
-```json
-{
-  "status": "success",
-  "code": 200,
-  "message": "User Successfully Registered",
-  "data": {
-    "user_id": "admin123",
-    "username": "admin_user",
-    "email": "admin@example.com"
-  }
-}
-```
-
 ---
 
 ### 2. **Admin Login** (`POST /admin/login`)
+
 This endpoint allows admins to log in by providing their `username` and `password`. A JWT token will be returned upon successful login.
+
+#### Request URL (Deployed):
+`https://assignment-submission-bym9.onrender.com/admin/login`
+
+#### Request URL (Local):
+`http://127.0.0.1:5000/admin/login`
 
 #### Request Body:
 ```json
@@ -181,52 +207,34 @@ This endpoint allows admins to log in by providing their `username` and `passwor
 - **400 Bad Request**: If username or password is incorrect.
 - **500 Internal Server Error**: If there’s an issue with the server.
 
-Example Response:
-```json
-{
-  "status": "success",
-  "code": 200,
-  "message": "Login Successfully Admin Panel",
-  "data": {
-    "user_id": "admin123",
-    "username": "admin_user",
-    "access_token": "your_jwt_token"
-  }
-}
-```
-
 ---
 
 ### 3. **View Assignments** (`GET /admin/assignments`)
+
 This endpoint allows authenticated admins to view all assignments that are assigned to them. Admins can view the user’s name, task, and the assignment status.
+
+#### Request URL (Deployed):
+`https://assignment-submission-bym9.onrender.com/admin/assignments`
+
+#### Request URL (Local):
+`http://127.0.0.1:5000/admin/assignments`
 
 #### Response:
 - **200 OK**: List of assignments for the admin.
 - **403 Forbidden**: If the current user is not an admin.
 - **404 Not Found**: If no assignments are found for the admin.
 
-Example Response:
-```json
-{
-  "status": "success",
-  "code": 200,
-  "message": "Assignments fetched successfully",
-  "data": [
-    {
-      "user_name": "user123",
-      "task": "Complete report",
-      "assign_id": "assign001",
-      "submitted_at": "2024-11-16 10:30:00",
-      "status": "pending"
-    }
-  ]
-}
-```
-
 ---
 
 ### 4. **Accept Assignment** (`POST /admin/assignments/<assign_id>/accept`)
-This endpoint allows an admin to accept a pending assignment by its `assign_id`. 
+
+This endpoint allows an admin to accept a pending assignment by its `assign_id`.
+
+#### Request URL (Deployed):
+`https://assignment-submission-bym9.onrender.com/admin/assignments/<assign_id>/accept`
+
+#### Request URL (Local):
+`http://127.0.0.1:5000/admin/assignments/<assign_id>/accept`
 
 #### Response:
 - **200 OK**: Assignment accepted successfully.
@@ -234,19 +242,17 @@ This endpoint allows an admin to accept a pending assignment by its `assign_id`.
 - **403 Forbidden**: If the admin is not authorized to accept the assignment.
 - **404 Not Found**: If the assignment does not exist.
 
-Example Response:
-```json
-{
-  "status": "success",
-  "code": 200,
-  "message": "Assignment assign001 accepted successfully"
-}
-```
-
 ---
 
 ### 5. **Reject Assignment** (`POST /admin/assignments/<assign_id>/reject`)
+
 This endpoint allows an admin to reject a pending assignment by its `assign_id`.
+
+#### Request URL (Deployed):
+`https://assignment-submission-bym9.onrender.com/admin/assignments/<assign_id>/reject`
+
+#### Request URL (Local):
+`http://127.0.0.1:5000/admin/assignments/<assign_id>/reject`
 
 #### Response:
 - **200 OK**: Assignment rejected successfully.
@@ -254,16 +260,21 @@ This endpoint allows an admin to reject a pending assignment by its `assign_id`.
 - **403 Forbidden**: If the admin is not authorized to reject the assignment.
 - **404 Not Found**: If the assignment does not exist.
 
-Example Response:
-```json
-{
-  "status": "success",
-  "code": 200,
-  "message": "Assignment assign001 rejected successfully"
-}
-```
+---
+
+## **Managing Access Tokens**
+
+To manage **JWT access tokens** properly:
+
+1. **Login** via
+
+ `/user/login` or `/admin/login` to obtain a token.
+2. **Store** the token securely (e.g., in localStorage or HTTPOnly cookies) for subsequent requests.
+3. **Include** the token in the `Authorization` header as `Bearer <your_token>` for all protected routes.
+4. **Logout** by simply discarding the token, as JWT tokens are stateless.
 
 ---
+
 
 ## **Models Overview**
 
@@ -303,6 +314,7 @@ Represents an assignment that is uploaded by a user. It contains fields such as 
 ---
 
 ## **Conclusion**
-This API provides full functionality for users and admins
 
- to manage tasks and assignments. It uses JWT for secure authentication, MongoDB for data storage, and Flask for handling the web framework and APIs.
+This API provides endpoints for both **users** and **admins** to interact with assignments. Users can upload assignments and view available admins, while admins can manage the assignments, accept or reject them. Access to these endpoints is controlled via **JWT authentication** to ensure security.
+
+For any questions or issues, feel free to reach out to the team.
