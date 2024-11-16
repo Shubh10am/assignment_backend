@@ -10,9 +10,8 @@ class BaseConfig(object):
     DEBUG = True
     JWT_IDENTITY_CLAIM = 'identity'
     JWT_TOKEN_LOCATION = ('headers',)
-    JWT_COOKIE_CSRF_PROTECT = False
     MONGODB_SETTINGS = {
-        "db": "ottermap_db",
+        "db": "assignment_db",
         "host": "localhost",
         "port": 27017,
         "connect": False
@@ -32,7 +31,7 @@ class ProductionConfig(BaseConfig):
     SECRET_KEY = os.getenv('SECRET_KEY', 'test')
     JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', 'test')
     MONGODB_SETTINGS = {
-        "db": "ottermap_db",
+        "db": "assignment_db",
         "host": os.getenv('MONGO_HOST'),
         "connect": False
     }

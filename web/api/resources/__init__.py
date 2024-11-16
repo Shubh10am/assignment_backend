@@ -10,11 +10,12 @@ api = Api(version="1.0",
 resources_blueprint = Blueprint("api", __name__)
 api.init_app(resources_blueprint)
 
-from web.api.resources.ottermap_task.views import ns as user_namespace
+from web.api.resources.assign_submission.user.views import ns as user_namespace
 api.add_namespace(user_namespace)
 
 modules = (
-    'web.api.resources.ottermap_task.views',
+    'web.api.resources.assign_submission.user.views',
+    'web.api.resources.assign_submission.admin.views',
 )
 
 
