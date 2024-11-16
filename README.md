@@ -1,3 +1,73 @@
+# **Quick Setup Guide**
+
+### **1. Clone the Repository**
+
+```bash
+git clone [https://github.com/yourusername/yourrepository.git](https://github.com/Shubh10am/assignment_backend.git)
+```
+
+### **2. Set Up Virtual Environment (Recommended)**
+
+- **Create a virtual environment:**
+
+  On macOS/Linux:
+  ```bash
+  python3 -m venv venv
+  ```
+
+  On Windows:
+  ```bash
+  python -m venv venv
+  ```
+
+- **Activate the virtual environment:**
+
+  On macOS/Linux:
+  ```bash
+  source venv/bin/activate
+  ```
+
+  On Windows:
+  ```bash
+  venv\Scripts\activate
+  ```
+
+### **3. Install Dependencies**
+
+Run the following to install all required dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+### **4. Set Up Environment Variables (Optional)**
+
+Create a `.env` file (if required):
+
+```bash
+FLASK_ENV=development
+MONGO_URI=mongodb://localhost:27017/yourdatabase
+JWT_SECRET_KEY=your_secret_key
+```
+
+### **5. Run the Flask Application Locally**
+
+```bash
+$env:PYTHONPATH="."; python web/wsgi.py
+```
+
+> Local URL: `http://127.0.0.1:5000`
+
+## **Conclusion**
+
+1. Clone the repo and set up the virtual environment.
+2. Install dependencies via `pip install -r requirements.txt`.
+3. Run the app with `python web/wsgi.py` for local testing.
+
+For more details and documentation of API's Please Read Below the Full Readme.
+
+---
+
 # README - User and Admin API Documentation
 
 This README provides an overview and documentation for the **User and Admin API** that manages user registration, login, assignment uploads, and task management using a MongoDB database. The API is deployed on **Render** and can be accessed remotely via the endpoint:
