@@ -3,7 +3,7 @@
 ### **1. Clone the Repository**
 
 ```bash
-git clone [https://github.com/yourusername/yourrepository.git](https://github.com/Shubh10am/assignment_backend.git)
+git clone https://github.com/Shubh10am/assignment_backend.git
 ```
 
 ### **2. Set Up Virtual Environment (Recommended)**
